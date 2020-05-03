@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div layout:fragment="content1">
+            <div class="container">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> Liste des produits </div>
+                    <div class="panel-body">
+                        <form th:action="@{/user/index}" method="get">
+                            <label>Mot clé : </label>
+                            <input type="text" name="keyword" th:value="${mc}"/>
+                            <button type="submit" class="btn btn-primary">Chercher</button>
+                        </form>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <th>ID</th><th>Designation</th><th>Prix </th><th>Quantité</th><th>Supp</th><th>Edit</th>
+                            </tr>
+                            <tr th:each="produit:${listProduits}">
+                                <td th:text="${produit.getId()}"></td>
+                                <td th:text="${produit.getDesignation()}"></td>
+                                <td th:text="${produit.getPrix()}"></td>
+                                <td th:text="${produit.getQuantite()}"></td>
+                                <td>
+                                    <a onclick="return confirm('Êtes-vous sure de vouloir supprimer?')" th:href="@{/admin/delete(id=${produit.getId()}, page=${currentPage}, keyword=${mc})}">delete</a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/admin/edit(id=${produit.getId()}, page=${currentPage}, keyword=${mc})}">Edit</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <ul class="nav nav-pills">
+                            <li th:class="${currentPage == status.index}  ? 'active':''" th:each="page,status:${pages}">
+                                <a th:text="${status.index}" th:href="@{/user/index(page=${status.index}, keyword=${mc})}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
