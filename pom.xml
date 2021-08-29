@@ -10,10 +10,10 @@
     </parent>
     <groupId>kd.dev</groupId>
     <artifactId>ecommerce-springmvc</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0.0-RELEASE</version>
     <name>ecommerce-springmvc</name>
     <description>Spring MVC</description>
-
+    <packaging>war</packaging>
     <properties>
         <java.version>1.8</java.version>
     </properties>
